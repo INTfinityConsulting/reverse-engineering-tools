@@ -74,9 +74,9 @@ class MemoryTracker(gdb.Command):
         counter = 1
         for i in range(len(self.allocations_tracker)):
             temp_tuple = self.allocations_tracker[i]
-            if "structure0x60_alloc_1" in temp_tuple[3]:
-                allocations_of_interest["%s - %s" % (temp_tuple[2],temp_tuple[0])] = (temp_tuple[0], "0x60 structure alloc %d" % counter, temp_tuple[2])
-                # print("%s %s <- %s" % (temp_tuple[1], temp_tuple[2], "0x60 structure alloc %d" % counter))
+            if "structure0x70_alloc_1" in temp_tuple[3]:
+                allocations_of_interest["%s - %s" % (temp_tuple[2],temp_tuple[0])] = (temp_tuple[0], "0x70 structure alloc %d" % counter, temp_tuple[2])
+                # print("%s %s <- %s" % (temp_tuple[1], temp_tuple[2], "0x70 structure alloc %d" % counter))
             if  "read_post_data_callback" in temp_tuple[3]:
                 allocations_of_interest["%s - %s" % (temp_tuple[2],temp_tuple[0])] = (temp_tuple[0], "heap alloc %d"% counter, temp_tuple[2])
                 # print("%s %s <- %s" % (temp_tuple[1], temp_tuple[2], "heap alloc %d" % counter))
@@ -245,7 +245,7 @@ class MemoryTracker(gdb.Command):
         if temp_tuple[2] == "Pending":
             if "read_post_data_callback" in temp_tuple[3]:
                 overwrite_tuple = (temp_tuple[0], "%s -> heap" % temp_tuple[1], allocated_memory, temp_tuple[3])
-            elif "structure0x60_alloc_1" in temp_tuple[3]:
+            elif "structure0x70_alloc_1" in temp_tuple[3]:
                 overwrite_tuple = (temp_tuple[0], "%s -> 0x70struct" % temp_tuple[1], allocated_memory, temp_tuple[3])
             elif "install_ssl" in temp_tuple[3]:
                 overwrite_tuple = (temp_tuple[0], "%s -> ssl_callback" % temp_tuple[1], allocated_memory, temp_tuple[3])
