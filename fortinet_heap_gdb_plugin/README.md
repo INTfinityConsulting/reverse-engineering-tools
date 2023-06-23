@@ -2,17 +2,17 @@
 The plugin will help track malloc and frees based on user's breakpoint. It requires user's to place breakpoints on all the malloc and free and then run the tracking commands to place the necessary information in the plugin.
 
 ## Track malloc
-Require two breakpoints: 1 on the malloc and the 1 after malloc is executed
-b = gdb.Breakpoint("*0x164E6DE", gdb.BP_HARDWARE_BREAKPOINT) # To track malloc_block call
-b.commands = 'silent\ntrack_memory malloc_size\ncontinue\n'
-
-b = gdb.Breakpoint("*0x164E6E3", gdb.BP_HARDWARE_BREAKPOINT) # To track malloc_block return
-b.commands = 'silent\ntrack_memory malloc_address\ncontinue\n'
+Require two breakpoints: 1 on the malloc and the 1 after malloc is executed\
+b = gdb.Breakpoint("*0x164E6DE", gdb.BP_HARDWARE_BREAKPOINT) # To track malloc_block call\
+b.commands = 'silent\ntrack_memory malloc_size\ncontinue\n'\
+\
+b = gdb.Breakpoint("*0x164E6E3", gdb.BP_HARDWARE_BREAKPOINT) # To track malloc_block return\
+b.commands = 'silent\ntrack_memory malloc_address\ncontinue\n'\
 
 ## Track free
-Require one breakpoints: 1 on the free instruction
-b = gdb.Breakpoint("*0x43D090") # track je_free
-b.commands = 'silent\ntrack_memory free\ncontinue\n'
+Require one breakpoints: 1 on the free instruction\
+b = gdb.Breakpoint("*0x43D090") # track je_free\
+b.commands = 'silent\ntrack_memory free\ncontinue\n'\
 
 # Usage
 
